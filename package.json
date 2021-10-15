@@ -2,13 +2,14 @@
   "name": "node-js-study-project",
   "version": "1.0.0",
   "description": "NodeJS studying project of EPAM 2021 mentoring program",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
-    "url": "later"
+    "url": "https://github.com/PavPavv/Node-study-project"
   },
   "keywords": [
     "nodejs",
@@ -20,5 +21,20 @@
     "SPA"
   ],
   "author": "Pavel Durnov <pavpavdev@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2"
+  }
 }
