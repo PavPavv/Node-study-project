@@ -3,26 +3,34 @@ import express, { Request, Response, NextFunction } from 'express';
 import { User } from "../db/data";
 import { users } from "../db/data";
 
+//  db async queries imitating
+// const fakeUsersFetch = (): Promise<User[]> => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(users);
+//     }, 500);
+//   });
+// };
+
+//  Helper function which is returning array of logins matched to the users input value
 const getAutoSuggestUsers = (loginSubstring: string, limit: number) => {
-  const result = [];
-  
   const arr = users.map((user: User) => user.login)
-                           .map((login: string) => login.toLowerCase())
                            .sort()
-                           .filter((loweredLogin: string) => loweredLogin.includes(loginSubstring))
-  return arr;
+                           .filter((login: string) => login.toLowerCase().includes(loginSubstring));                      
+  
+  return arr.slice(0, limit);
 };
 
-//
+//  Control functions for a certain routes
 
 export const getUsers = (req: Request, res: Response, next: NextFunction) => {
-  const actualUsers = users.filter((user) => user.isDeleted !== true);
+  const actualUsers = users.filter((user: User) => user.isDeleted !== true);
   res.json(actualUsers);
 };
 
 export const getUserById = (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id.toString();
-  const userById = users.filter((user) => user.id === id);
+  const userById = users.filter((user: User) => user.id === id);
 
   if (userById.length === 1) {
     res.json(userById);
@@ -63,7 +71,7 @@ export const createUser = (req: Request, res: Response, next: NextFunction) => {
 
 export const deleteUserById = (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id.toString();
-  const userById = users.filter((user) => user.id === id);
+  const userById = users.filter((user: User) => user.id === id);
 
   if (userById.length === 1) {
     //  mark object as deleted and hide it from view collecton
@@ -84,7 +92,7 @@ export const updateUserById = (req: Request, res: Response, next: NextFunction) 
   const newLogin = req.body.login;
   const newPassword = req.body.password;
   const newAge = req.body.age;
-  const userById = users.filter((user) => user.id === id);
+  const userById = users.filter((user: User) => user.id === id);
 
   if (userById.length === 1) {
     userById[0].login = newLogin ? newLogin : userById[0].login;

@@ -6,6 +6,7 @@ export type User = {
   isDeleted: boolean;
 };
 
+//  Dummy users
 export const users: User[] = [
   {
     id: '1',

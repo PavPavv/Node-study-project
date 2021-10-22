@@ -13,7 +13,7 @@ import {
 const usersRouter = express.Router();
 const validator = require('express-joi-validation').createValidator({});
 
-//  server validation schemas
+//  server validation schemas for users routes
 
 const postSchema = Joi.object({
   login: Joi.string().required(),
@@ -24,7 +24,7 @@ const postSchema = Joi.object({
 const updateSchema = Joi.object({
   login: Joi.string(),
   password: Joi.string().regex(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/),
-  age: Joi.string().regex(/^\b([4-9]|[1-9][0-9]|1[01][0-9]|1[1-2][0-9]|130)\b$/).required(),
+  age: Joi.string().regex(/^\b([4-9]|[1-9][0-9]|1[01][0-9]|1[1-2][0-9]|130)\b$/),
 });
 
 const paramSchema = Joi.object({
@@ -34,6 +34,8 @@ const paramSchema = Joi.object({
 const suggestSchema = Joi.object({
   value: Joi.string().required(),
 });
+
+//  USERS ROUTES
 
 //  GET /users
 usersRouter.get('/users', getUsers);
