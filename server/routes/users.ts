@@ -31,10 +31,6 @@ const paramSchema = Joi.object({
   id: Joi.number().required(),
 });
 
-const suggestSchema = Joi.object({
-  value: Joi.string().required(),
-});
-
 //  USERS ROUTES
 
 //  GET /users
