@@ -1,10 +1,4 @@
-export type User = {
-  id: string;
-  login: string;
-  password: string;
-  age: number;
-  isDeleted: boolean;
-};
+import { User } from "../interfaces/users";
 
 //  Dummy users
 export const users: User[] = [

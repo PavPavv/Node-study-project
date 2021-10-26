@@ -52,7 +52,7 @@ usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(upda
 //  DELETE /users/1
 usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
-//  POST /users/suggest
-usersRouter.post('/users/suggest', validator.body(suggestSchema), autoSuggest);
+//  GET /users/suggest
+usersRouter.get('/suggest/users', autoSuggest);
 
 export default usersRouter;
