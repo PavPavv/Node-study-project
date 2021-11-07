@@ -1,9 +1,13 @@
 import express, { Request, Response, NextFunction } from 'express';
+import dotenv from 'dotenv';
 
+import sequelise from './db/db'
 import usersRouter from './routes/users';
 
 const app = express();
-const PORT = 8000;
+dotenv.config();
+
+const PORT = process.env.PORT || 8080;
 
 //  parse body requests to JSON
 app.use(express.json());
@@ -12,6 +16,11 @@ app.use(express.urlencoded({
 }));
 
 app.use('/', usersRouter);
+
+sequelise
+  .authenticate()
+  .then(():void => console.log('Connection to db succeeded'))
+  .catch((err: any) => console.error('Db connection error: ', err));
 
 //  Error-handling middleware
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
