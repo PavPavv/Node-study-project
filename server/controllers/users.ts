@@ -57,12 +57,6 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
       password: password,
       age: +age,
       isDeleted: false,
-    };
-  
-    if (!login || !password || !age) {
-      return res.status(400).json({
-        message: 'uncorrect request data: login, password and age fields are required!',
-      });
     }
   
     //  create post in db
@@ -84,7 +78,7 @@ export const deleteUserById = async (req: Request, res: Response, next: NextFunc
     const userById = actlUsers.filter((user: User) => user.id === id);
 
     if (userById.length === 1) {
-      //  mark object as deleted and hide it from view collecton
+      //  mark object as deleted and hide it from view
       userById[0].isDeleted = true;
       
       res.status(201).json({

@@ -36,19 +36,19 @@ const paramSchema = Joi.object({
 //  GET /users
 usersRouter.get('/users', getUsers);
 
-//  GET /users/1
+//  GET /users/{number}
 usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
 
 //  POST /users
 usersRouter.post('/users', validator.body(postSchema), createUser);
 
-//  PUT /users/1
+//  PUT /users/{number}
 usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
 
-//  DELETE /users/1
+//  DELETE /users/{number}
 usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
-//  GET /users/suggest
+//  GET /users/suggest?limit={number}&loginSubstring={string}
 usersRouter.get('/suggest/users', autoSuggest);
 
 export default usersRouter;
