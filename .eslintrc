@@ -1,4 +1,4 @@
-module.exports = {
+{
     "parser": "babel-eslint",
     "plugins": [
     ],
@@ -330,4 +330,4 @@ module.exports = {
         "__DEVTOOLS__": true,
         "PUBLIC_URL": true
     }
-};
+}
