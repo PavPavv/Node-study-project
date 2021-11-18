@@ -1,19 +1,18 @@
 import express, { Request, Response, NextFunction } from 'express';
+import { v4 as uuid, validate } from 'uuid';
 
-import { User } from "../interfaces/users";
-import { users } from "../db/data";
+import * as UsersDataAccess from '../data-access/data-access';
+import { Users } from '../models/users';
 
-const actualUsers = async (): Promise<User[]> => users.filter((user: User) => user.isDeleted !== true);
 
-//  Helper function which is returning array of logins matched to the users input value
+//  Helper function which is returning array of logins matched to the users input value from db
 const getAutoSuggestUsers = async (loginSubstring: string, limit: number) => {
   try {
-    const actlUsers: User[] = await actualUsers();
-    const arr = actlUsers.map((user: User) => user.login)
-                             .sort()
-                             .filter((login: string) => login.toLowerCase().includes(loginSubstring));                      
-    
-    return arr.slice(0, limit);
+    const actlUsers = await UsersDataAccess.getArrayOfLogins(loginSubstring, limit);
+    if (actlUsers) {
+      return actlUsers;
+    }
+    return new Error('Something went wrong with filtering')
   } catch (err: any) {
     return err;
   }
@@ -22,25 +21,21 @@ const getAutoSuggestUsers = async (loginSubstring: string, limit: number) => {
 //  Control functions for a certain routes
 
 export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
-  const actlUsers: User[] = await actualUsers();
-  res.json(actlUsers);
+  try {
+    const users  = await UsersDataAccess.getActualUsers();
+    res.json(users);
+  } catch (err: any) {
+    return res.status(500).json({message: err.message});
+  }
 };
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.id.toString();
-    const actlUsers: User[] = await actualUsers();
-    const userById = actlUsers.filter((user: User) => user.id === id);
-
-    if (userById.length === 1) {
-      res.json(userById);
-    } else {
-      res.status(404).send({
-        message: `Error: there is no user with id: ${id}`,
-      });
-    }
+    const user  = await UsersDataAccess.getActualUserById(id);
+    res.json(user);
   } catch (err: any) {
-      return res.status(500).json({message: err.message})
+      return res.status(500).json({message: err.message});
   }
 };
 
@@ -49,46 +44,26 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     const login = req.body.login;
     const password = req.body.password;
     const age = req.body.age;
-    const biggestId = users.map(item => item.id).map(Number);
-    const newId = Math.max(...biggestId) + 1;
+    const maxId = await UsersDataAccess.getMaxUsersId();
+    let id = 0;
+    let strId = '';
+    if (maxId) {
+      id = (+maxId + 1);
+      strId = id.toString();
+    }
+
     const newUser = {
-      id: newId.toString(),
-      login: login,
-      password: password,
+      id: strId,
+      login,
+      password,
       age: +age,
-      isDeleted: false,
+      isdeleted: false,
+    };
+    const createdUser = await UsersDataAccess.createUser(newUser);
+    if (createdUser) {
+      res.status(201).json(createdUser);
     }
-  
-    //  create post in db
-    users.push(newUser);
-  
-    res.status(201).json({
-      message: 'User created successfully!',
-    });
     
-  } catch (err: any) {
-      return res.status(500).json({message: err.message})
-  }
-};
-
-export const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = req.params.id.toString();
-    const actlUsers: User[] = await actualUsers();
-    const userById = actlUsers.filter((user: User) => user.id === id);
-
-    if (userById.length === 1) {
-      //  mark object as deleted and hide it from view
-      userById[0].isDeleted = true;
-      
-      res.status(201).json({
-        message: `User with login '${userById[0].login}' has been successfully deleted!`,
-      });
-    } else {
-      res.status(404).send({
-        message: `Error: there is no user with id: '${userById[0].id}'`,
-      });
-    }
   } catch (err: any) {
       return res.status(500).json({message: err.message})
   }
@@ -100,20 +75,26 @@ export const updateUserById = async (req: Request, res: Response, next: NextFunc
     const newLogin = req.body.login;
     const newPassword = req.body.password;
     const newAge = req.body.age;
-    const actlUsers: User[] = await actualUsers();
-    const userById = actlUsers.filter((user: User) => user.id === id);
 
-    if (userById.length === 1) {
-      userById[0].login = newLogin ? newLogin : userById[0].login;
-      userById[0].password = newPassword ? newPassword : userById[0].password;
-      userById[0].age = newAge ? newAge : userById[0].age;
-  
+    const updatedUser = await UsersDataAccess.updateUser(id, newLogin, newPassword, newAge);
+    if (updatedUser) {
       res.status(201).json({
-        message: `User with id ${id} has been successfully updated!`,
+        message: 'Successfully updated!'
       });
-    } else {
-      res.status(404).send({
-        message: `Error: there is no user with id: ${id}`,
+    }
+  } catch (err: any) {
+      return res.status(500).json({message: err.message})
+  }
+};
+
+export const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params.id.toString();
+
+    const deletedUser = await UsersDataAccess.deleteUser(id);
+    if (deletedUser) {
+      res.status(201).json({
+        message: 'Successfully deleted!'
       });
     }
   } catch (err: any) {
@@ -124,10 +105,8 @@ export const updateUserById = async (req: Request, res: Response, next: NextFunc
 export const autoSuggest = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { limit, loginSubstring } = req.query;
-    const suggest = {
-      usersSuggest: await getAutoSuggestUsers(loginSubstring as string, Number(limit)),
-    };
-    res.status(201).json(suggest);
+    const usersSuggest = await getAutoSuggestUsers(loginSubstring as string, Number(limit));
+    res.status(201).json(usersSuggest);
   } catch (err: any) {
     return res.status(500).json({message: err.message})
   }
