@@ -1,6 +1,9 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Op } from 'sequelize';
+
 
 import sequelise from '../db/db';
+
+export const op = Op;
 
 export const Users = sequelise.define(
   'users',
