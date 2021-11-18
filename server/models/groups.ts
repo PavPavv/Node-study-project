@@ -4,7 +4,7 @@ import sequelise from '../db/db';
 
 export const op = Op;
 
-export const Users = sequelise.define(
+export const Groups = sequelise.define(
   'users',
   {
     id: {
@@ -12,20 +12,12 @@ export const Users = sequelise.define(
       primaryKey: true,
       allowNull: false,
     },
-    login: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    age: {
-      type: DataTypes.NUMBER,
       allowNull: false,
     },
     isdeleted: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },  

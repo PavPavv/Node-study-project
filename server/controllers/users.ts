@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { v4 as uuid, validate } from 'uuid';
 
-import * as UsersDataAccess from '../data-access/data-access';
+import * as UsersDataAccess from '../data-access/users';
 import { Users } from '../models/users';
 
 

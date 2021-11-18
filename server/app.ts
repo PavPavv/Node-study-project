@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 
 import sequelise from './db/db'
 import usersRouter from './routes/users';
+import groupsRouter from './routes/groups';
 
 const app = express();
 dotenv.config();
@@ -15,12 +16,14 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.use('/', usersRouter);
-
+//  db initialization
 sequelise
   .authenticate()
   .then(():void => console.log('Connection to db succeeded'))
   .catch((err: any) => console.error('Db connection error: ', err));
+
+app.use('/', usersRouter);
+app.use('/groups', groupsRouter)
 
 //  Error-handling middleware
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
