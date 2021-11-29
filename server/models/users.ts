@@ -4,8 +4,8 @@ import sequelise from '../db/db';
 
 export const op = Op;
 
-export const Users = sequelise.define(
-  'users',
+export const User = sequelise.define(
+  'user',
   {
     id: {
       type: DataTypes.STRING,

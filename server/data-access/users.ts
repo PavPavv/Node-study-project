@@ -1,19 +1,10 @@
-import { Users, op } from "../models/users";
+import { User, op } from "../models/users";
 
-import { User } from "../interfaces/users";
-
-export const getAllUsers = async () => {
-  try {
-    const allUsers = await Users.findAll();
-    return allUsers;
-  } catch (err) {
-    console.log(err);
-  }
-};
+import { User as UserType} from "../types/users";
 
 export const getMaxUsersId = async () => {
   try {
-    const allUsers = await Users.findAll();
+    const allUsers = await User.findAll();
     return allUsers.length;
   } catch (err) {
     console.log(err);
@@ -22,7 +13,7 @@ export const getMaxUsersId = async () => {
 
 export const getActualUsers = async () => {
   try {
-    const actualUsers = await Users.findAll({
+    const actualUsers = await User.findAll({
       where: {
         isdeleted: false,
       }
@@ -33,9 +24,23 @@ export const getActualUsers = async () => {
   }
 };
 
+export const getDeletedUsers = async () => {
+  try {
+    const allUsers = await User.findAll({
+      where: {
+        isdeleted: true,
+      }
+    });
+    return allUsers;
+    console.log(allUsers)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getArrayOfLogins = async (str: string, limit: number) => {
   try {
-    const logins = await Users.findAll({
+    const logins = await User.findAll({
       limit,
       where: {
         [op.and]: [
@@ -59,7 +64,7 @@ export const getArrayOfLogins = async (str: string, limit: number) => {
 
 export const getActualUserById = async (id: string) => {
   try {
-    const actualUser = await Users.findOne({
+    const actualUser = await User.findOne({
       where: {
         [op.and]: [
           {
@@ -77,15 +82,15 @@ export const getActualUserById = async (id: string) => {
   }
 };
 
-export const createUser =  async (user: User) => {
+export const createUser =  async (user: UserType) => {
   try {
-    const foundUser = await Users.findOne({
+    const foundUser = await User.findOne({
       where: {
         id: user.id,
       },
     });
     if (!foundUser) {
-      const newUser = await Users.create(user);
+      const newUser = await User.create(user);
       return { newUser, created: true };
     }
   } catch (err) {
@@ -95,17 +100,42 @@ export const createUser =  async (user: User) => {
 
 export const updateUser =  async (id: string, login: string, password: string, age: string) => {
   try {
-    const foundUser = await Users.findOne({
+    const foundUser = await User.findOne({
       where: {
-        id: id,
+        id,
       },
     });
     if (foundUser) {
-      const updatedUser = await Users.update(
+      const updatedUser = await User.update(
         {
           login,
           password,
           age,
+        },
+        {
+          where: {
+            id,
+          },
+        },
+      );
+    }
+    return foundUser;
+  } catch (err) {
+    console.log('db error: ', err);
+  }
+};
+
+export const deleteUser =  async (id: string) => {
+  try {
+    const foundUser = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    if (foundUser) {
+      const updatedUser = await User.update(
+        {
+          isdeleted: true,
         },
         {
           where: {
@@ -120,22 +150,19 @@ export const updateUser =  async (id: string, login: string, password: string, a
   }
 };
 
-export const deleteUser =  async (id: string) => {
+
+
+
+
+export const testG = async () => {
   try {
-    const foundUser = await Users.findOne({
+    const t = await User.findOne({
       where: {
-        id,
-      },
+        id: 4,
+      }
     });
-    if (foundUser) {
-      const deletedUser = await Users.destroy({
-        where: {
-          id,
-        }
-      });
-      return foundUser;
-    }
-  } catch (err) {
-    console.log('db error: ', err);
+    return t;
+  } catch (err: any) {
+
   }
 };

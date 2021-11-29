@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-import { v4 as uuid, validate } from 'uuid';
+import { Request, Response, NextFunction } from 'express';
 
 import * as UsersDataAccess from '../data-access/users';
-import { Users } from '../models/users';
+// import { Users } from '../models/users';
+import { testG } from '../data-access/users';
 
 
 //  Helper function which is returning array of logins matched to the users input value from db
@@ -19,6 +19,15 @@ const getAutoSuggestUsers = async (loginSubstring: string, limit: number) => {
 };
 
 //  Control functions for a certain routes
+
+export const getDeletedUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const users  = await UsersDataAccess.getDeletedUsers();
+    res.json(users);
+  } catch (err: any) {
+    return res.status(500).json({message: err.message});
+  }
+};
 
 export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -111,3 +120,18 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
     return res.status(500).json({message: err.message})
   }
 };
+
+
+//  test
+
+export const test = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const t = await UsersDataAccess.testG();
+    console.log(t)
+    res.status(201).json({
+      message: t,
+    });
+  } catch (err: any) {
+    return res.status(500).json({message: err.message})
+  }
+}

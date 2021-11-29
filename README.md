@@ -13,6 +13,26 @@
 
 To start project clone the repo, type in the terminal **npm install** and then run command **npm start**.
 
+## Project structure:
+In the root directory there are main config files of the project:
+* **tsconfig.json** - config for TS compilier
+* **README.md** - project's documentation
+* **.package.json** - all the project's dependencies and commands
+* **.gitignore** - git exceptions
+* **.eslint** - code style config
+* _client_ - directory for client-side code (view part for browsers)
+* _server_ - directory for server-side code (endpoints, db connection and etc.)
+* *node_modules* - nodeJS library
+
+_server_ directory contains following:
+* **app.ts** - server root file where server starts
+* **routes** - all the project's endpoints here
+* **controllers** - endpoints functionality
+* **types** - server instances types
+* **db** - db connection
+* **models** - db models
+* **data-access** - db and server intermediate
+
 ## Hometask 2:  In memory CRUD REST service with validation
 
 Endpoints created during this task:
