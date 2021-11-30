@@ -1,15 +1,8 @@
+import sequelise from '../db/db';
 import { User, op } from "../models/users";
-
+import { Group } from '../models/groups';
+import { UserGroup } from '../models/userGroup';
 import { User as UserType} from "../types/users";
-
-export const getMaxUsersId = async () => {
-  try {
-    const allUsers = await User.findAll();
-    return allUsers.length;
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const getActualUsers = async () => {
   try {
@@ -133,10 +126,7 @@ export const deleteUser =  async (id: string) => {
       },
     });
     if (foundUser) {
-      const updatedUser = await User.update(
-        {
-          isdeleted: true,
-        },
+      const deletedUser = await User.destroy(
         {
           where: {
             id,
@@ -150,19 +140,39 @@ export const deleteUser =  async (id: string) => {
   }
 };
 
+export const addUsersToGroup = async (groupId: string, userId: string) => {
+  const t = await sequelise.transaction();
 
-
-
-
-export const testG = async () => {
   try {
-    const t = await User.findOne({
+    const targetGroup = await Group.findOne({
       where: {
-        id: 4,
-      }
+        id: groupId,
+      },
     });
-    return t;
-  } catch (err: any) {
 
+    const targetUser = await User.findOne({
+      where: {
+        id: userId,
+      }
+    })
+    if (targetGroup && targetUser) {
+      const userInGroup = UserGroup.create({
+        userId,
+        groupId,
+      });
+      await t.commit();
+
+      return {
+        status: 1,
+      }
+    } else {
+      return {
+        status: 0,
+      }
+    }
+
+  } catch (err: any) {
+    await t.rollback();
+    throw err;
   }
 };

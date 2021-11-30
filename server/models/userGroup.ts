@@ -1,36 +1,33 @@
+import { userInfo } from 'os';
 import { DataTypes } from 'sequelize';
 
-import sequelise from '../db/db';
+import sequelize from '../db/db';
 import { Group } from './groups';
 import { User } from './users';
 
-export const UserGroup = sequelise.define(
-  'UserGroups',
+export const UserGroup = sequelize.define(
+  'user_groups',
   {
 
-    userId: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+    UserId: {
+      type: DataTypes.UUID,
       references: {
         model: User,
         key: 'id',
       },
     },
 
-    groupId: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+    GroupId: {
+      type: DataTypes.UUID,
       references: {
         model: Group,
         key: 'id',
       },
     },
   },
-
-  {
-    tableName: 'users_groups',
-  },
-); 
+);
+UserGroup.sync();
 
 User.belongsToMany(Group, { through: UserGroup, });
 Group.belongsToMany(User, { through: UserGroup, });
+

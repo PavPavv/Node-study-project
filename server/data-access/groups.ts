@@ -1,7 +1,4 @@
-import sequelise from '../db/db';
 import { Group } from "../models/groups";
-import { User } from "../models/users";
-import { UserGroup } from '../models/userGroup';
 import { Group as GroupType} from "../types/group";
 
 export const createGroup = async (group: GroupType) => {
@@ -63,24 +60,5 @@ export const deleteGroupById = async (id: string) => {
     return group;
   } catch (err: any) {
     console.log(err)
-  }
-};
-
-
-export const addUsersToGroup = async (groupId: string, userId: string) => {
-  const t = await sequelise.transaction();
-  
-  try {
-    const targetGroup = await Group.findOne({
-      where: {
-        id: groupId,
-      },
-    });
-
-    await t.commit();
-
-  } catch (err: any) {
-    await t.rollback();
-    throw err;
   }
 };

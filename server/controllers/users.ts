@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as UsersDataAccess from '../data-access/users';
 // import { Users } from '../models/users';
-import { testG } from '../data-access/users';
 
 
 //  Helper function which is returning array of logins matched to the users input value from db
@@ -53,16 +53,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     const login = req.body.login;
     const password = req.body.password;
     const age = req.body.age;
-    const maxId = await UsersDataAccess.getMaxUsersId();
-    let id = 0;
-    let strId = '';
-    if (maxId) {
-      id = (+maxId + 1);
-      strId = id.toString();
-    }
 
     const newUser = {
-      id: strId,
+      id: uuidv4(),
       login,
       password,
       age: +age,
@@ -121,16 +114,20 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
-
-//  test
-
-export const test = async (req: Request, res: Response, next: NextFunction) => {
+export const addToGroup = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const t = await UsersDataAccess.testG();
-    console.log(t)
-    res.status(201).json({
-      message: t,
-    });
+    const groupId = req.body.groupId;
+    const userId = req.body.userId;
+    const addedUsersToGroup = await UsersDataAccess.addUsersToGroup(groupId, userId);
+    if (addedUsersToGroup.status) {
+      res.status(201).json({
+        message: 'Successfully added to group!'
+      });
+    } else {
+      res.status(400).json({
+        message: 'There is no such user or group :(',
+      });
+    }
   } catch (err: any) {
     return res.status(500).json({message: err.message})
   }

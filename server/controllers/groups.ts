@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { Group } from '../types/group';
 
+import { Group } from '../types/group';
 import * as GroupsDataAccess from '../data-access/groups'
 
 export const getGroups = async (req: Request, res: Response, next: NextFunction) => {

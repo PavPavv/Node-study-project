@@ -9,7 +9,7 @@ import {
   deleteUserById, 
   updateUserById, 
   autoSuggest,
-  test
+  addToGroup
 } from '../controllers/users';
 
 const usersRouter = express.Router();
@@ -53,14 +53,10 @@ usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(upda
 //  DELETE /users/{number}
 usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
-//  GET /users/suggest?limit={number}&loginSubstring={string}
+//  GET /suggest/users?limit={number}&loginSubstring={string}
 usersRouter.get('/suggest/users', autoSuggest);
 
-
-
-
-
-//      test
-usersRouter.get('/test', test);
+//  POST /users/addToGroup
+usersRouter.post('/users/addToGroup', addToGroup);
 
 export default usersRouter;
