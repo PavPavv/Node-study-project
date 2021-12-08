@@ -27,7 +27,7 @@ export const getGroupById = async (req: Request, res: Response, next: NextFuncti
       res.json(group);
     } else {
       res.json({
-        message: 'No groups found'
+        message: 'Something went wrong with users_group transaction'
       });
     }
   } catch (err: any) {
@@ -48,7 +48,7 @@ export const createNewGroup = async (req: Request, res: Response, next: NextFunc
     const createdGroup = await GroupsDataAccess.createGroup(newGroup);
     if (createdGroup) {
       res.status(201).json({
-        message: 'The group has been successfully created.'
+        message: `The group ${name} has been successfully created.`
       });
     }
     

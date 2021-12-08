@@ -63,7 +63,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     };
     const createdUser = await UsersDataAccess.createUser(newUser);
     if (createdUser) {
-      res.status(201).json(createdUser);
+      res.status(201).json({
+        message: `User ${login} has been successfully created`,
+      });
     }
     
   } catch (err: any) {
@@ -118,6 +120,10 @@ export const addToGroup = async (req: Request, res: Response, next: NextFunction
   try {
     const groupId = req.body.groupId;
     const userId = req.body.userId;
+    
+    console.log('userId',userId)
+    console.log('groupId',groupId)
+
     const addedUsersToGroup = await UsersDataAccess.addUsersToGroup(groupId, userId);
     if (addedUsersToGroup.status) {
       res.status(201).json({

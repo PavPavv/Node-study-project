@@ -9,25 +9,31 @@ export const UserGroup = sequelize.define(
   'user_groups',
   {
 
-    UserId: {
+    userId: {
       type: DataTypes.UUID,
+      allowNull: true,
       references: {
         model: User,
         key: 'id',
       },
     },
 
-    GroupId: {
+    groupId: {
       type: DataTypes.UUID,
+      allowNull: true,
       references: {
         model: Group,
         key: 'id',
       },
     },
   },
+  {
+    tableName: 'user_groups', 
+    timestamps: true, 
+  },
 );
 UserGroup.sync();
 
-User.belongsToMany(Group, { through: UserGroup, });
-Group.belongsToMany(User, { through: UserGroup, });
+User.belongsToMany(Group, { through: UserGroup, foreignKey: 'userId'});
+Group.belongsToMany(User, { through: UserGroup, foreignKey: 'groupId'});
 

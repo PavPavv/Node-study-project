@@ -149,17 +149,18 @@ export const addUsersToGroup = async (groupId: string, userId: string) => {
         id: groupId,
       },
     });
-
     const targetUser = await User.findOne({
       where: {
         id: userId,
       }
     })
+    
     if (targetGroup && targetUser) {
-      const userInGroup = UserGroup.create({
+      const userInGroup = await UserGroup.create({
         userId,
         groupId,
-      });
+      }, { transaction: t });
+
       await t.commit();
 
       return {

@@ -31,9 +31,10 @@ _server_ directory contains following:
 * **types** - server instances types
 * **db** - db connection
 * **models** - db models
-* **data-access** - db and server intermediate
+* **data-access** - db intermediate
 
 _client_ directory contains following:
+* **src** - client code
 
 ## Hometask 2:  In memory CRUD REST service with validation
 
@@ -49,4 +50,6 @@ Added _db_ directory with PostgreSQL connection via Sequelize.
 Added _data-access_ directory with methods to manipulates directly to db.
 
 ## Hometask 4: Second entity and many-to-many relationships
-Added new model for _through_ table **UserGroup**.
+Added new model **UserGroup** for _through_-table "user_groups".
+
+## Hometask 5: Logging and error handling
