@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
-import { v4 as uuid, validate } from 'uuid';
+import { Request, Response, NextFunction } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as UsersDataAccess from '../data-access/users';
-import { Users } from '../models/users';
+// import { Users } from '../models/users';
 
 
 //  Helper function which is returning array of logins matched to the users input value from db
@@ -19,6 +19,15 @@ const getAutoSuggestUsers = async (loginSubstring: string, limit: number) => {
 };
 
 //  Control functions for a certain routes
+
+export const getDeletedUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const users  = await UsersDataAccess.getDeletedUsers();
+    res.json(users);
+  } catch (err: any) {
+    return res.status(500).json({message: err.message});
+  }
+};
 
 export const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -44,16 +53,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     const login = req.body.login;
     const password = req.body.password;
     const age = req.body.age;
-    const maxId = await UsersDataAccess.getMaxUsersId();
-    let id = 0;
-    let strId = '';
-    if (maxId) {
-      id = (+maxId + 1);
-      strId = id.toString();
-    }
 
     const newUser = {
-      id: strId,
+      id: uuidv4(),
       login,
       password,
       age: +age,
@@ -61,7 +63,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     };
     const createdUser = await UsersDataAccess.createUser(newUser);
     if (createdUser) {
-      res.status(201).json(createdUser);
+      res.status(201).json({
+        message: `User ${login} has been successfully created`,
+      });
     }
     
   } catch (err: any) {
@@ -111,3 +115,26 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
     return res.status(500).json({message: err.message})
   }
 };
+
+export const addToGroup = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const groupId = req.body.groupId;
+    const userId = req.body.userId;
+    
+    console.log('userId',userId)
+    console.log('groupId',groupId)
+
+    const addedUsersToGroup = await UsersDataAccess.addUsersToGroup(groupId, userId);
+    if (addedUsersToGroup.status) {
+      res.status(201).json({
+        message: 'Successfully added to group!'
+      });
+    } else {
+      res.status(400).json({
+        message: 'There is no such user or group :(',
+      });
+    }
+  } catch (err: any) {
+    return res.status(500).json({message: err.message})
+  }
+}

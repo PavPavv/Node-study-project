@@ -1,28 +1,12 @@
-import { Users, op } from "../models/users";
-
-import { User } from "../interfaces/users";
-
-export const getAllUsers = async () => {
-  try {
-    const allUsers = await Users.findAll();
-    return allUsers;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getMaxUsersId = async () => {
-  try {
-    const allUsers = await Users.findAll();
-    return allUsers.length;
-  } catch (err) {
-    console.log(err);
-  }
-};
+import sequelise from '../db/db';
+import { User, op } from "../models/users";
+import { Group } from '../models/groups';
+import { UserGroup } from '../models/userGroup';
+import { User as UserType} from "../types/users";
 
 export const getActualUsers = async () => {
   try {
-    const actualUsers = await Users.findAll({
+    const actualUsers = await User.findAll({
       where: {
         isdeleted: false,
       }
@@ -33,9 +17,23 @@ export const getActualUsers = async () => {
   }
 };
 
+export const getDeletedUsers = async () => {
+  try {
+    const allUsers = await User.findAll({
+      where: {
+        isdeleted: true,
+      }
+    });
+    return allUsers;
+    console.log(allUsers)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getArrayOfLogins = async (str: string, limit: number) => {
   try {
-    const logins = await Users.findAll({
+    const logins = await User.findAll({
       limit,
       where: {
         [op.and]: [
@@ -59,7 +57,7 @@ export const getArrayOfLogins = async (str: string, limit: number) => {
 
 export const getActualUserById = async (id: string) => {
   try {
-    const actualUser = await Users.findOne({
+    const actualUser = await User.findOne({
       where: {
         [op.and]: [
           {
@@ -77,15 +75,15 @@ export const getActualUserById = async (id: string) => {
   }
 };
 
-export const createUser =  async (user: User) => {
+export const createUser =  async (user: UserType) => {
   try {
-    const foundUser = await Users.findOne({
+    const foundUser = await User.findOne({
       where: {
         id: user.id,
       },
     });
     if (!foundUser) {
-      const newUser = await Users.create(user);
+      const newUser = await User.create(user);
       return { newUser, created: true };
     }
   } catch (err) {
@@ -95,18 +93,40 @@ export const createUser =  async (user: User) => {
 
 export const updateUser =  async (id: string, login: string, password: string, age: string) => {
   try {
-    const foundUser = await Users.findOne({
+    const foundUser = await User.findOne({
       where: {
-        id: id,
+        id,
       },
     });
     if (foundUser) {
-      const updatedUser = await Users.update(
+      const updatedUser = await User.update(
         {
           login,
           password,
           age,
         },
+        {
+          where: {
+            id,
+          },
+        },
+      );
+    }
+    return foundUser;
+  } catch (err) {
+    console.log('db error: ', err);
+  }
+};
+
+export const deleteUser =  async (id: string) => {
+  try {
+    const foundUser = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    if (foundUser) {
+      const deletedUser = await User.destroy(
         {
           where: {
             id,
@@ -120,22 +140,40 @@ export const updateUser =  async (id: string, login: string, password: string, a
   }
 };
 
-export const deleteUser =  async (id: string) => {
+export const addUsersToGroup = async (groupId: string, userId: string) => {
+  const t = await sequelise.transaction();
+
   try {
-    const foundUser = await Users.findOne({
+    const targetGroup = await Group.findOne({
       where: {
-        id,
+        id: groupId,
       },
     });
-    if (foundUser) {
-      const deletedUser = await Users.destroy({
-        where: {
-          id,
-        }
-      });
-      return foundUser;
+    const targetUser = await User.findOne({
+      where: {
+        id: userId,
+      }
+    })
+    
+    if (targetGroup && targetUser) {
+      const userInGroup = await UserGroup.create({
+        userId,
+        groupId,
+      }, { transaction: t });
+
+      await t.commit();
+
+      return {
+        status: 1,
+      }
+    } else {
+      return {
+        status: 0,
+      }
     }
-  } catch (err) {
-    console.log('db error: ', err);
+
+  } catch (err: any) {
+    await t.rollback();
+    throw err;
   }
 };

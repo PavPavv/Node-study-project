@@ -4,11 +4,12 @@ import sequelise from '../db/db';
 
 export const op = Op;
 
-export const Users = sequelise.define(
-  'users',
+export const User = sequelise.define(
+  'user',
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
@@ -21,7 +22,7 @@ export const Users = sequelise.define(
       allowNull: false,
     },
     age: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     isdeleted: {
@@ -33,3 +34,4 @@ export const Users = sequelise.define(
     timestamps: false,
   }
 );
+User.sync();

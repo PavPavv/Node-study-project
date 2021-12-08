@@ -2,12 +2,14 @@ import express from 'express';
 import Joi from 'joi';
 
 import { 
-  getUsers, 
+  getUsers,
+  getDeletedUsers,
   getUserById, 
   createUser, 
   deleteUserById, 
   updateUserById, 
-  autoSuggest 
+  autoSuggest,
+  addToGroup
 } from '../controllers/users';
 
 const usersRouter = express.Router();
@@ -36,6 +38,9 @@ const paramSchema = Joi.object({
 //  GET /users
 usersRouter.get('/users', getUsers);
 
+//  GET /all-users (with soft-deleted)
+usersRouter.get('/deleted-users', getDeletedUsers);
+
 //  GET /users/{number}
 usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
 
@@ -48,7 +53,10 @@ usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(upda
 //  DELETE /users/{number}
 usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
-//  GET /users/suggest?limit={number}&loginSubstring={string}
+//  GET /suggest/users?limit={number}&loginSubstring={string}
 usersRouter.get('/suggest/users', autoSuggest);
+
+//  POST /users/addToGroup
+usersRouter.post('/users/addToGroup', addToGroup);
 
 export default usersRouter;

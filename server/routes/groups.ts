@@ -1,14 +1,12 @@
 import express from 'express';
 import Joi from 'joi';
 
-// import { 
-//   getUsers, 
-//   getUserById, 
-//   createUser, 
-//   deleteUserById, 
-//   updateUserById, 
-//   autoSuggest 
-// } from '../controllers/users';
+import { getGroups,
+         getGroupById,
+         createNewGroup,
+         updateGroupById,
+         deleteGroupById
+        } from '../controllers/groups';
 
 const groupsRouter = express.Router();
 //const validator = require('express-joi-validation').createValidator({});
@@ -31,24 +29,21 @@ const groupsRouter = express.Router();
 //   id: Joi.number().required(),
 // });
 
-//  USERS ROUTES
+//  GROUPS ROUTES
 
-//  GET /users
-//usersRouter.get('/users', getUsers);
+//  GET /groups
+groupsRouter.get('/', getGroups);
 
-//  GET /users/{number}
-//usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
+//  GET /groups/group
+groupsRouter.get('/group', getGroupById);
 
-//  POST /users
-//usersRouter.post('/users', validator.body(postSchema), createUser);
+//  POST /groups
+groupsRouter.post('/', createNewGroup);
 
-//  PUT /users/{number}
-//usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
+//  PUT /groups
+groupsRouter.put('/', updateGroupById);
 
-//  DELETE /users/{number}
-//usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
-
-//  GET /users/suggest?limit={number}&loginSubstring={string}
-//usersRouter.get('/suggest/users', autoSuggest);
+//  DELETE /groups
+groupsRouter.delete('/', deleteGroupById);
 
 export default groupsRouter;

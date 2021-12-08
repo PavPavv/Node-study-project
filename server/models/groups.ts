@@ -4,11 +4,12 @@ import sequelise from '../db/db';
 
 export const op = Op;
 
-export const Groups = sequelise.define(
-  'users',
+export const Group = sequelise.define(
+  'group',
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
@@ -16,8 +17,8 @@ export const Groups = sequelise.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isdeleted: {
-      type: DataTypes.STRING,
+    permission: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   },  
@@ -25,3 +26,5 @@ export const Groups = sequelise.define(
     timestamps: false,
   }
 );
+
+Group.sync();
