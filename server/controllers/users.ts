@@ -25,7 +25,13 @@ export const getDeletedUsers = async (req: Request, res: Response, next: NextFun
     const users  = await UsersDataAccess.getDeletedUsers();
     res.json(users);
   } catch (err: any) {
-    return res.status(500).json({message: err.message});
+    return res.status(500).json(
+      {
+        'function name': 'getDeletedUsers',
+        'function args': 'none',
+        message: err.message
+      }
+    );
   }
 };
 
@@ -34,26 +40,41 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction) 
     const users  = await UsersDataAccess.getActualUsers();
     res.json(users);
   } catch (err: any) {
-    return res.status(500).json({message: err.message});
+    return res.status(500).json(
+      {
+        'function name': 'getUsers',
+        'function args': 'none',
+        message: err.message
+      }
+    );
   }
 };
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = req.params.id.toString();
+  const id = req.params.id.toString();
+
+  try {  
     const user  = await UsersDataAccess.getActualUserById(id);
     res.json(user);
   } catch (err: any) {
-      return res.status(500).json({message: err.message});
+      return res.status(500).json(
+        {
+          'function name': 'getUserById',
+          'function args': {
+            id,
+          },
+          message: err.message
+        }
+      );
   }
 };
 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
     const login = req.body.login;
     const password = req.body.password;
     const age = req.body.age;
-
+  
+  try {
     const newUser = {
       id: uuidv4(),
       login,
@@ -69,17 +90,27 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     }
     
   } catch (err: any) {
-      return res.status(500).json({message: err.message})
+      return res.status(500).json(
+        {
+          'function name': 'createUser',
+          'function args': {
+            login,
+            password,
+            age,
+          },
+          message: err.message
+        }
+      )
   }
 };
 
 export const updateUserById = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = req.params.id.toString();
-    const newLogin = req.body.login;
-    const newPassword = req.body.password;
-    const newAge = req.body.age;
+  const id = req.params.id.toString();
+  const newLogin = req.body.login;
+  const newPassword = req.body.password;
+  const newAge = req.body.age;
 
+  try {
     const updatedUser = await UsersDataAccess.updateUser(id, newLogin, newPassword, newAge);
     if (updatedUser) {
       res.status(201).json({
@@ -87,14 +118,25 @@ export const updateUserById = async (req: Request, res: Response, next: NextFunc
       });
     }
   } catch (err: any) {
-      return res.status(500).json({message: err.message})
+      return res.status(500).json(
+        {
+          'function name': 'updateUserById',
+          'function args': {
+            id,
+            newLogin,
+            newPassword,
+            newAge,
+          },
+          message: err.message
+        }
+      )
   }
 };
 
 export const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.params.id.toString();
+  
   try {
-    const id = req.params.id.toString();
-
     const deletedUser = await UsersDataAccess.deleteUser(id);
     if (deletedUser) {
       res.status(201).json({
@@ -102,17 +144,35 @@ export const deleteUserById = async (req: Request, res: Response, next: NextFunc
       });
     }
   } catch (err: any) {
-      return res.status(500).json({message: err.message})
+      return res.status(500).json(
+        {
+          'function name': 'deleteUserById',
+          'function args': {
+            id,
+          },
+          message: err.message
+        }
+      )
   }
 };
 
 export const autoSuggest = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { limit, loginSubstring } = req.query;
+  const { limit, loginSubstring } = req.query;
+
+  try {  
     const usersSuggest = await getAutoSuggestUsers(loginSubstring as string, Number(limit));
     res.status(201).json(usersSuggest);
   } catch (err: any) {
-    return res.status(500).json({message: err.message})
+    return res.status(500).json(
+      {
+        'function name': 'autoSuggest',
+        'function args': {
+          limit,
+          loginSubstring,
+        },
+        message: err.message
+      }
+    )
   }
 };
 

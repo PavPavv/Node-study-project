@@ -10,6 +10,7 @@
 * ESLint
 * PostgreSQL
 * Sequelize
+* Winston
 
 To start project clone the repo, type in the terminal **npm install** and then run command **npm start**.
 
@@ -53,3 +54,7 @@ Added _data-access_ directory with methods to manipulates directly to db.
 Added new model **UserGroup** for _through_-table "user_groups".
 
 ## Hometask 5: Logging and error handling
+Added Winston package for logging server errors.
+
+
+Added to every controller error log name, arguments which have been passed to the controller function, error message.
