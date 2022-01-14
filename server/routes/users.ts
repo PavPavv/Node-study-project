@@ -30,7 +30,7 @@ const updateSchema = Joi.object({
 });
 
 const paramSchema = Joi.object({
-  id: Joi.number().required(),
+  id: Joi.string().required(),
 });
 
 //  USERS ROUTES
@@ -41,7 +41,7 @@ usersRouter.get('/users', getUsers);
 //  GET /all-users (with soft-deleted)
 usersRouter.get('/deleted-users', getDeletedUsers);
 
-//  GET /users/{number}
+//  GET /users/{string}
 usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
 
 //  POST /users
