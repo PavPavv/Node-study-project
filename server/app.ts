@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import sequelise from './db/db'
 import usersRouter from './routes/users';
 import groupsRouter from './routes/groups';
+import { logger } from './logger/logger';
 
 const app = express();
 dotenv.config();
@@ -38,4 +39,20 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+});
+
+process.on('SIGTERM', () => {
+  sequelise.close();
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error(error);
+  sequelise.close();
+  process.exit(2);
+});
+
+process.on('unhandledRejection', (error) => {
+  logger.error(error);
+  sequelise.close();
+  process.exit(3);
 });
