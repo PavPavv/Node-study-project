@@ -177,13 +177,10 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
 };
 
 export const addToGroup = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const groupId = req.body.groupId;
-    const userId = req.body.userId;
-    
-    console.log('userId',userId)
-    console.log('groupId',groupId)
-
+  const groupId = req.body.groupId;
+  const userId = req.body.userId;
+  
+  try {  
     const addedUsersToGroup = await UsersDataAccess.addUsersToGroup(groupId, userId);
     if (addedUsersToGroup.status) {
       res.status(201).json({

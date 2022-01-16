@@ -20,8 +20,9 @@ export const getGroups = async (req: Request, res: Response, next: NextFunction)
 };
 
 export const getGroupById = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.body.id;
+  
   try {
-    const id = req.body.id;
     const group  = await GroupsDataAccess.getGroupById(id);
     if (group) {
       res.json(group);
@@ -36,9 +37,9 @@ export const getGroupById = async (req: Request, res: Response, next: NextFuncti
 };
 
 export const createNewGroup = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const name = req.body.name;
+  const name = req.body.name;
 
+  try {
     const newGroup: Group = {
       id: uuidv4(),
       name,
@@ -58,9 +59,10 @@ export const createNewGroup = async (req: Request, res: Response, next: NextFunc
 };
 
 export const updateGroupById = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  
   try {
-    const id = req.body.id;
-    const name = req.body.name;
     const updatedGroup = await GroupsDataAccess.updateGroupById(id, name);
     if (updatedGroup) {
       res.status(201).json({
@@ -73,8 +75,9 @@ export const updateGroupById = async (req: Request, res: Response, next: NextFun
 }
 
 export const deleteGroupById = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.body.id;
+
   try {
-    const id = req.body.id;
     const deletedGroup = await GroupsDataAccess.deleteGroupById(id);
     if (deletedGroup) {
       res.status(201).json({

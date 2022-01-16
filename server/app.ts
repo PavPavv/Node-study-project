@@ -1,21 +1,28 @@
 import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'
 
 import sequelise from './db/db'
 import usersRouter from './routes/users';
 import groupsRouter from './routes/groups';
 import { logger } from './logger/logger';
+import { loggerMiddleware } from './middleware/logger';
+import { errorHandlerMiddleware } from './middleware/errorHandler';
 
 const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 
+//  MIDDLEWARES
 //  parse body requests to JSON
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+app.use(cors());
+app.use(loggerMiddleware);
+app.use(errorHandlerMiddleware);
 
 //  db initialization
 sequelise
@@ -24,7 +31,7 @@ sequelise
   .catch((err: any) => console.error('Db connection error: ', err));
 
 app.use('/', usersRouter);
-app.use('/groups', groupsRouter)
+app.use('/groups', groupsRouter);
 
 //  Error-handling middleware
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {

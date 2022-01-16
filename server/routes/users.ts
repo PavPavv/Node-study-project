@@ -47,10 +47,10 @@ usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
 //  POST /users
 usersRouter.post('/users', validator.body(postSchema), createUser);
 
-//  PUT /users/{number}
+//  PUT /users/{string}
 usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
 
-//  DELETE /users/{number}
+//  DELETE /users/{string}
 usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
 //  GET /suggest/users?limit={number}&loginSubstring={string}
