@@ -25,7 +25,6 @@ export const getDeletedUsers = async () => {
       }
     });
     return allUsers;
-    console.log(allUsers)
   } catch (err) {
     console.log(err);
   }
@@ -65,6 +64,26 @@ export const getActualUserById = async (id: string) => {
           },
           {
             id,
+          },
+        ],
+      }
+    });
+    return actualUser;
+  } catch (err: any) {
+    console.log('db error: ', err);
+  }
+};
+
+export const getActualUserByLogin = async (login: string) => {
+  try {
+    const actualUser = await User.findOne({
+      where: {
+        [op.and]: [
+          {
+            isdeleted: false,
+          },
+          {
+            login,
           },
         ],
       }

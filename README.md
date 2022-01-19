@@ -4,13 +4,15 @@
 * NodeJS
 * Express
 * TypeScript
-* Joi
 * Nodemon
 * Babel
 * ESLint
 * PostgreSQL
 * Sequelize
 * Winston
+* Joi
+* JsonWebToken
+* Cors
 
 To start project, please, clone the repo, type in the terminal **npm install** and then run command **npm start**.
 
@@ -27,12 +29,13 @@ In the root directory there are main config files of the project:
 
 _server_ directory contains following:
 * **app.ts** - server root file where server starts
-* **routes** - all the project's endpoints here
-* **controllers** - endpoints functionality
-* **types** - server instances types
-* **db** - db connection
-* **models** - db models
-* **data-access** - db intermediate
+* **/controllers** - endpoints functionality
+* **/data-access** - db intermediate
+* **/db** - db connection
+* **/middlewares** - app middle-wares which is using in the app.ts
+* **/models** - db models
+* **/routes** - all the project's endpoints here
+* **/types** - server instances types
 
 _client_ directory contains following:
 * **src** - client code
@@ -58,3 +61,4 @@ Added Winston package for logging server errors.
 Added to every controller error log name, arguments which have been passed to the controller function, error message.
 
 ## Homework 6: JWT authorization and CORS
+Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication.
