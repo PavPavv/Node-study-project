@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
 import * as UsersDataAccess from '../data-access/users';
-// import { Users } from '../models/users';
 
 
 //  Helper function which is returning array of logins matched to the users input value from db
@@ -69,10 +68,27 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
   }
 };
 
+export const getUserByLogin = async (req: Request, res: Response, next: NextFunction) => {
+  const { login } = req.body;
+
+  try {  
+    const user  = await UsersDataAccess.getActualUserByLogin(login);
+    res.json(user);
+  } catch (err: any) {
+      return res.status(500).json(
+        {
+          'function name': 'getUserById',
+          'function args': {
+            login,
+          },
+          message: err.message
+        }
+      );
+  }
+};
+
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
-    const login = req.body.login;
-    const password = req.body.password;
-    const age = req.body.age;
+    const { login, password, age } = req.body;
   
   try {
     const newUser = {
@@ -177,13 +193,10 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
 };
 
 export const addToGroup = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const groupId = req.body.groupId;
-    const userId = req.body.userId;
-    
-    console.log('userId',userId)
-    console.log('groupId',groupId)
-
+  const groupId = req.body.groupId;
+  const userId = req.body.userId;
+  
+  try {  
     const addedUsersToGroup = await UsersDataAccess.addUsersToGroup(groupId, userId);
     if (addedUsersToGroup.status) {
       res.status(201).json({

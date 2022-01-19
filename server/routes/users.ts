@@ -44,19 +44,21 @@ usersRouter.get('/deleted-users', getDeletedUsers);
 //  GET /users/{string}
 usersRouter.get('/users/:id', validator.params(paramSchema), getUserById);
 
-//  POST /users
-usersRouter.post('/users', validator.body(postSchema), createUser);
-
-//  PUT /users/{number}
-usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
-
-//  DELETE /users/{number}
-usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
-
 //  GET /suggest/users?limit={number}&loginSubstring={string}
 usersRouter.get('/suggest/users', autoSuggest);
 
+//  POST /users
+usersRouter.post('/users', validator.body(postSchema), createUser);
+
 //  POST /users/addToGroup
 usersRouter.post('/users/addToGroup', addToGroup);
+
+usersRouter.post('/users/login-test', getUserById)
+
+//  PUT /users/{string}
+usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
+
+//  DELETE /users/{string}
+usersRouter.delete('/users/:id', validator.params(paramSchema), deleteUserById);
 
 export default usersRouter;

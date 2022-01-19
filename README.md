@@ -4,13 +4,15 @@
 * NodeJS
 * Express
 * TypeScript
-* Joi
 * Nodemon
 * Babel
 * ESLint
 * PostgreSQL
 * Sequelize
 * Winston
+* Joi
+* JsonWebToken
+* Cors
 
 To start project, please, clone the repo, type in the terminal **npm install** and then run command **npm start**.
 
@@ -27,17 +29,18 @@ In the root directory there are main config files of the project:
 
 _server_ directory contains following:
 * **app.ts** - server root file where server starts
-* **routes** - all the project's endpoints here
-* **controllers** - endpoints functionality
-* **types** - server instances types
-* **db** - db connection
-* **models** - db models
-* **data-access** - db intermediate
+* **/controllers** - endpoints functionality
+* **/data-access** - db intermediate
+* **/db** - db connection
+* **/middlewares** - app middle-wares which is using in the app.ts
+* **/models** - db models
+* **/routes** - all the project's endpoints here
+* **/types** - server instances types
 
 _client_ directory contains following:
 * **src** - client code
 
-## Hometask 2:  In memory CRUD REST service with validation
+## Homework 2:  In memory CRUD REST service with validationo
 
 Endpoints created during this task:
 * _/users_ (with **GET** method returns array of dummy users)
@@ -46,13 +49,17 @@ Endpoints created during this task:
 * _/users/:id_ (with **PUT** method updates user in the array of dummy users)
 * _/suggest/users?limit={number}&loginSubstring={string}  (with **GET** method returns array of logins matched with input value)
 
-## Hometask 3: PostgreSQL and layered architecture
+## Homework 3: PostgreSQL and layered architecture
 Added _db_ directory with PostgreSQL connection via Sequelize.
 Added _data-access_ directory with methods to manipulates directly to db.
 
 ## Hometask 4: Second entity and many-to-many relationships
 Added new model **UserGroup** for _through_-table "user_groups".
 
-## Hometask 5: Logging and error handling
+## Homework 5: Logging and error handling
 Added Winston package for logging server errors.
 Added to every controller error log name, arguments which have been passed to the controller function, error message.
+
+## Homework 6: JWT authorization and CORS
+Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication. Implemented authentication with JWT. Added new _login_ endpoint
+and auth middleware.
