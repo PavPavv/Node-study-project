@@ -61,4 +61,5 @@ Added Winston package for logging server errors.
 Added to every controller error log name, arguments which have been passed to the controller function, error message.
 
 ## Homework 6: JWT authorization and CORS
-Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication.
+Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication. Implemented authentication with JWT. Added new _login_ endpoint
+and auth middleware.
