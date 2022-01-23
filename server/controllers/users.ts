@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
 import * as UsersDataAccess from '../data-access/users';
-
+import { StatusCodesEnum } from '../constants/statuseCodes';
 
 //  Helper function which is returning array of logins matched to the users input value from db
 const getAutoSuggestUsers = async (loginSubstring: string, limit: number) => {
@@ -24,7 +24,7 @@ export const getDeletedUsers = async (req: Request, res: Response, next: NextFun
     const users  = await UsersDataAccess.getDeletedUsers();
     res.json(users);
   } catch (err: any) {
-    return res.status(500).json(
+    return res.status(StatusCodesEnum.InternalServerError).json(
       {
         'function name': 'getDeletedUsers',
         'function args': 'none',
@@ -39,7 +39,7 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction) 
     const users  = await UsersDataAccess.getActualUsers();
     res.json(users);
   } catch (err: any) {
-    return res.status(500).json(
+    return res.status(StatusCodesEnum.InternalServerError).json(
       {
         'function name': 'getUsers',
         'function args': 'none',
@@ -56,7 +56,7 @@ export const getUserById = async (req: Request, res: Response, next: NextFunctio
     const user  = await UsersDataAccess.getActualUserById(id);
     res.json(user);
   } catch (err: any) {
-      return res.status(500).json(
+      return res.status(StatusCodesEnum.InternalServerError).json(
         {
           'function name': 'getUserById',
           'function args': {
@@ -75,7 +75,7 @@ export const getUserByLogin = async (req: Request, res: Response, next: NextFunc
     const user  = await UsersDataAccess.getActualUserByLogin(login);
     res.json(user);
   } catch (err: any) {
-      return res.status(500).json(
+      return res.status(StatusCodesEnum.InternalServerError).json(
         {
           'function name': 'getUserById',
           'function args': {
@@ -106,7 +106,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     }
     
   } catch (err: any) {
-      return res.status(500).json(
+      return res.status(StatusCodesEnum.InternalServerError).json(
         {
           'function name': 'createUser',
           'function args': {
@@ -134,7 +134,7 @@ export const updateUserById = async (req: Request, res: Response, next: NextFunc
       });
     }
   } catch (err: any) {
-      return res.status(500).json(
+      return res.status(StatusCodesEnum.InternalServerError).json(
         {
           'function name': 'updateUserById',
           'function args': {
@@ -160,7 +160,7 @@ export const deleteUserById = async (req: Request, res: Response, next: NextFunc
       });
     }
   } catch (err: any) {
-      return res.status(500).json(
+      return res.status(StatusCodesEnum.InternalServerError).json(
         {
           'function name': 'deleteUserById',
           'function args': {
@@ -179,7 +179,7 @@ export const autoSuggest = async (req: Request, res: Response, next: NextFunctio
     const usersSuggest = await getAutoSuggestUsers(loginSubstring as string, Number(limit));
     res.status(201).json(usersSuggest);
   } catch (err: any) {
-    return res.status(500).json(
+    return res.status(StatusCodesEnum.InternalServerError).json(
       {
         'function name': 'autoSuggest',
         'function args': {
@@ -203,11 +203,11 @@ export const addToGroup = async (req: Request, res: Response, next: NextFunction
         message: 'Successfully added to group!'
       });
     } else {
-      res.status(400).json({
+      res.status(StatusCodesEnum.BadRequest).json({
         message: 'There is no such user or group :(',
       });
     }
   } catch (err: any) {
-    return res.status(500).json({message: err.message})
+    return res.status(StatusCodesEnum.InternalServerError).json({message: err.message})
   }
 }
