@@ -63,3 +63,5 @@ Added to every controller error log name, arguments which have been passed to th
 ## Homework 6: JWT authorization and CORS
 Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication. Implemented authentication with JWT. Added new _login_ endpoint
 and auth middleware.
+
+## Homework 7: Unit tests

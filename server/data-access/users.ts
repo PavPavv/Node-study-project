@@ -145,12 +145,15 @@ export const deleteUser =  async (id: string) => {
       },
     });
     if (foundUser) {
-      const deletedUser = await User.destroy(
+      const updatedUser = await User.update(
+        {
+          'isdeleted': true,
+        },
         {
           where: {
             id,
-          }
-        }
+          },
+        },
       );
     }
     return foundUser;

@@ -76,3 +76,20 @@
 {"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario456\",\"password\":\"nir123564\"},   at Wed Jan 19 2022 21:31:30 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario456\",\"password\":\"nir123564\"},   at Wed Jan 19 2022 21:37:35 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123564\"},   at Wed Jan 19 2022 21:37:40 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 12:13:29 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 12:13:57 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 22:13:15 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Sun Jan 23 2022 23:05:08 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 23:05:22 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/68e92952-bf76-4c54-a426-9c7f578bf172, method=DELETE,    at Sun Jan 23 2022 23:06:09 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/875244f9-43b2-4b2f-a83b-0028389419b5, method=DELETE,    at Sun Jan 23 2022 23:06:34 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Sun Jan 23 2022 23:06:41 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Sun Jan 23 2022 23:06:42 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=POST, body: {\"login\":\"LarsLars\",\"password\":\"killemAll1983\",\"age\":\"60\"},   at Sun Jan 23 2022 23:09:37 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 23:15:48 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/4bd4205c-91cc-49e3-b555-77463b42b940, method=DELETE,    at Sun Jan 23 2022 23:18:40 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Sun Jan 23 2022 23:18:48 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 23:18:58 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/4bd4205c-91cc-49e3-b555-77463b42b940, method=DELETE,    at Sun Jan 23 2022 23:21:37 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users, method=GET,    at Sun Jan 23 2022 23:21:41 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Sun Jan 23 2022 23:21:48 GMT+0400 (Samara Standard Time)","service":"user-group service"}
