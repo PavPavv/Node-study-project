@@ -170,3 +170,6 @@
 {"level":"info","message":"url=/groups, method=DELETE, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\"},   at Tue Jan 25 2022 19:33:17 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/groups, method=GET,    at Tue Jan 25 2022 19:33:21 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/groups, method=DELETE, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\"},   at Tue Jan 25 2022 19:33:24 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=DELETE, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\"},   at Tue Jan 25 2022 19:50:04 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Tue Jan 25 2022 19:50:07 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Tue Jan 25 2022 19:50:32 GMT+0400 (Samara Standard Time)","service":"user-group service"}

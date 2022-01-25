@@ -24,7 +24,7 @@ app.use(express.urlencoded({
 }));
 app.use(cors());
 app.use(loggerMiddleware);
-//  app.use(authMiddleware);
+app.use(authMiddleware);
 app.use(errorHandlerMiddleware);
 
 
