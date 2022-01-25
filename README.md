@@ -52,6 +52,7 @@ Endpoints created during this task:
 ## Homework 3: PostgreSQL and layered architecture
 Added _db_ directory with PostgreSQL connection via Sequelize.
 Added _data-access_ directory with methods to manipulates directly to db.
+Added 3-layer architecture (data-access/services/controllers).
 
 ## Hometask 4: Second entity and many-to-many relationships
 Added new model **UserGroup** for _through_-table "user_groups".
@@ -65,3 +66,4 @@ Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication.
 and auth middleware.
 
 ## Homework 7: Unit tests
+Added unit tests for users controller.

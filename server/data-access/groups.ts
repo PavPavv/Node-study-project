@@ -34,17 +34,25 @@ export const getGroupById = async (id: string) => {
 
 export const updateGroupById = async (id: string, name: string) => {
   try {
-    const group = await Group.update(
-      {
-        name,
+    const foundGroup = await Group.findOne({
+      where: {
+        id,
       },
-      {
-        where: {
-          id,
+    });
+    if (foundGroup) {
+      const group = await Group.update(
+        {
+          name,
         },
-      },
-    );
-    return group;
+        {
+          where: {
+            id,
+          },
+        },
+      );
+      return group;
+    }
+    
   } catch (err: any) {
     console.log(err)
   }

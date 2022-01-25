@@ -1,90 +1,91 @@
 import { Request, Response, NextFunction } from 'express';
-import { v4 as uuidv4 } from 'uuid';
 
-import { Group } from '../types/group';
-import * as GroupsDataAccess from '../data-access/groups'
+import * as groupsServices from '../services/groups';
+import { StatusCodesEnum } from '../constants/statuseCodes';
 
 export const getGroups = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const groups  = await GroupsDataAccess.getAllGroups();
-    if (groups) {
-      res.json(groups);
-    } else {
-      res.json({
-        message: 'No groups found'
-      });
-    }
-  } catch (err: any) {
-    return res.status(500).json({message: err.message});
-  }  
+  const groups = await groupsServices.getGroupsService();
+  if (groups) {
+    res.status(StatusCodesEnum.OK).json(groups);
+  } else {
+    return res.status(StatusCodesEnum.InternalServerError).json(
+      {
+        message: `Error with getting the groups`,
+      }
+    );
+  }
+
+  return next(); 
 };
 
 export const getGroupById = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.body.id;
-  
-  try {
-    const group  = await GroupsDataAccess.getGroupById(id);
-    if (group) {
-      res.json(group);
-    } else {
-      res.json({
-        message: 'Something went wrong with users_group transaction'
-      });
-    }
-  } catch (err: any) {
-    return res.status(500).json({message: err.message});
-  }  
+  const group = await groupsServices.getGroupById(id);
+  if (group) {
+    res.status(StatusCodesEnum.OK).json(group);
+  } else {
+    return res.status(StatusCodesEnum.InternalServerError).json(
+      {
+        message: `Error with getting the group`,
+      }
+    );
+  }
+
+  return next();
 };
 
 export const createNewGroup = async (req: Request, res: Response, next: NextFunction) => {
   const name = req.body.name;
+  const group = await groupsServices.createNewGroupService(name);
 
-  try {
-    const newGroup: Group = {
-      id: uuidv4(),
-      name,
-      permission: ['READ'],
-    };
-
-    const createdGroup = await GroupsDataAccess.createGroup(newGroup);
-    if (createdGroup) {
-      res.status(201).json({
-        message: `The group ${name} has been successfully created.`
-      });
-    }
-    
-  } catch (err: any) {
-      return res.status(500).json({message: err.message})
+  if (group) {
+    res.status(StatusCodesEnum.SuccessfullyCreated).json(group);
+  } else {
+    return res.status(StatusCodesEnum.InternalServerError).json(
+      {
+        message: `Error occurred while creating a new group`,
+      }
+    );
   }
+
+  return next();
 };
 
 export const updateGroupById = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.body.id;
   const name = req.body.name;
+  const group = await groupsServices.updateGroupByIdService(id, name);
   
-  try {
-    const updatedGroup = await GroupsDataAccess.updateGroupById(id, name);
-    if (updatedGroup) {
-      res.status(201).json({
-        message: 'The group has been successfully updated!'
-      });
-    }
-  } catch (err: any) {
-    return res.status(500).json({message: err.message})
+  if (group) {
+    res.status(StatusCodesEnum.OK).json({
+      message: 'The group has been successfully updated',
+    });
+  } else {
+    return res.status(StatusCodesEnum.InternalServerError).json(
+      {
+        message: `Error occurred while creating a new group`,
+      }
+    );
   }
-}
+
+  return next();
+};
 
 export const deleteGroupById = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.body.id;
+  const deletedGroup = await groupsServices.deleteGroupByIdService(id);
 
-  try {
-    const deletedGroup = await GroupsDataAccess.deleteGroupById(id);
-    if (deletedGroup) {
-      res.status(201).json({
-        message: 'The group has been successfully deleted!'
-      });
-    }
-  } catch (err: any) {
-    return res.status(500).json({message: err.message})
+  if (deletedGroup) {
+    res.status(StatusCodesEnum.OK).json({
+      message: 'The group has been successfully deleted',
+    });
+  } else {
+    return res.status(StatusCodesEnum.InternalServerError).json(
+      {
+        message: `Error occurred while deleting a new group`,
+      }
+    );
   }
-}
+
+  return next();
+};

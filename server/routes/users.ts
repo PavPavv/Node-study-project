@@ -4,7 +4,8 @@ import Joi from 'joi';
 import { 
   getUsers,
   getDeletedUsers,
-  getUserById, 
+  getUserById,
+  getUserByLogin,
   createUser, 
   deleteUserById, 
   updateUserById, 
@@ -21,6 +22,10 @@ const postSchema = Joi.object({
   login: Joi.string().required(),
   password: Joi.string().regex(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/).required(),
   age: Joi.string().regex(/^\b([4-9]|[1-9][0-9]|1[01][0-9]|1[1-2][0-9]|130)\b$/).required(),
+});
+
+const postSchemaLogin = Joi.object({
+  login: Joi.string().required(),
 });
 
 const updateSchema = Joi.object({
@@ -50,10 +55,11 @@ usersRouter.get('/suggest/users', autoSuggest);
 //  POST /users
 usersRouter.post('/users', validator.body(postSchema), createUser);
 
+//  POST /user
+usersRouter.post('/user', validator.body(postSchemaLogin), getUserByLogin);
+
 //  POST /users/addToGroup
 usersRouter.post('/users/addToGroup', addToGroup);
-
-usersRouter.post('/users/login-test', getUserById)
 
 //  PUT /users/{string}
 usersRouter.put('/users/:id', validator.params(paramSchema), validator.body(updateSchema),updateUserById);
