@@ -10,7 +10,7 @@ export const getGroupsService = async () => {
   }
 };
 
-export const getGroupById = async (id: string) => {
+export const getGroupByIdService = async (id: string) => {
   const group  = await GroupsDataAccess.getGroupById(id);
   if (group) {
     return group ? group : null;

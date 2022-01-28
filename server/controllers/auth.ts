@@ -9,13 +9,14 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
   
   try {
     if (login && password) {
+      console.log('AAAAAAAA!')
       const currentUser = await UsersDataAccess.getActualUserByLogin(login);
       if (!currentUser) {
         return res.status(404).json({ message: errors.BAD_LOGIN_OR_PASSWORD })
       }
 
       const token = sign({ login, }, process.env.KEY || '', {
-        expiresIn: '25m'
+        expiresIn: '24h'
       });
 
       res.json({ token });

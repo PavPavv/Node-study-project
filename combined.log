@@ -173,3 +173,59 @@
 {"level":"info","message":"url=/groups, method=DELETE, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\"},   at Tue Jan 25 2022 19:50:04 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/groups, method=GET,    at Tue Jan 25 2022 19:50:07 GMT+0400 (Samara Standard Time)","service":"user-group service"}
 {"level":"info","message":"url=/groups, method=GET,    at Tue Jan 25 2022 19:50:32 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Wed Jan 26 2022 18:29:59 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Wed Jan 26 2022 18:30:02 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Wed Jan 26 2022 18:32:48 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 11:53:46 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 12:16:54 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/user, method=POST, body: {\"login\":\"JamesH\"},   at Thu Jan 27 2022 12:17:22 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 12:20:42 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123564\"},   at Thu Jan 27 2022 12:20:58 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 12:23:40 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:24:24 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:24:26 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:24:50 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:24:51 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:28:32 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:48:51 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:54:12 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:55:23 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 12:56:37 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 12:57:01 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 12:57:07 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 15:00:05 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Thu Jan 27 2022 15:04:26 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 15:05:29 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 15:05:31 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 15:05:38 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Thu Jan 27 2022 15:05:42 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Thu Jan 27 2022 15:09:47 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Thu Jan 27 2022 15:10:02 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Thu Jan 27 2022 17:45:25 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/deleted-users, method=GET,    at Thu Jan 27 2022 23:14:54 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/38103bcb-29f1-4255-aae4-0a80058a78e6, method=GET,    at Fri Jan 28 2022 15:30:13 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Fri Jan 28 2022 15:30:34 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Fri Jan 28 2022 15:30:35 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Fri Jan 28 2022 15:30:36 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/38103bcb-29f1-4255-aae4-0a80058a78e6, method=GET,    at Fri Jan 28 2022 15:30:50 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/38103bcb-29f1-4255-aae4-0a80058a78e6, method=GET,    at Fri Jan 28 2022 15:30:51 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/user, method=POST, body: {\"login\":\"JamesH\"},   at Fri Jan 28 2022 15:31:30 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/auth/, method=POST, body: {\"login\":\"superMario\",\"password\":\"nir123\"},   at Fri Jan 28 2022 15:31:38 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Fri Jan 28 2022 15:32:19 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/, method=GET,    at Fri Jan 28 2022 15:32:25 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/38103bcb-29f1-4255-aae4-0a80058a78e6, method=GET,    at Fri Jan 28 2022 15:32:37 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/f68a1a76-1a3b-444a-af56-bc8ea0972d80, method=PUT, body: {\"login\":\"LukeHaskin\",\"password\":\"Fortress2008\",\"age\":\"36\"},   at Fri Jan 28 2022 17:01:48 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/f68a1a76-1a3b-444a-af56-bc8ea0972d80, method=PUT, body: {\"login\":\"LukeHaskin\",\"password\":\"Fortress2008\",\"age\":\"36\"},   at Fri Jan 28 2022 17:02:04 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/users/f68a1a76-1a3b-444a-af56-bc8ea0972d80, method=PUT, body: {\"login\":\"LukeHaskin\",\"password\":\"Fortress2008\"},   at Fri Jan 28 2022 17:02:14 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/suggest/users?limit=4&loginSubstring=su, method=GET,  query: {\"limit\":\"4\",\"loginSubstring\":\"su\"},  at Fri Jan 28 2022 18:01:12 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/suggest/users?limit=4&loginSubstring=su, method=GET,  query: {\"limit\":\"4\",\"loginSubstring\":\"su\"},  at Fri Jan 28 2022 18:01:20 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Fri Jan 28 2022 19:04:00 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Fri Jan 28 2022 19:04:17 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups/group, method=GET, body: {\"id\":\"39f363b3-11e1-400e-b019-51d35a24eb40\"},   at Fri Jan 28 2022 19:04:25 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups/group, method=GET, body: {\"id\":\"39f363b3-11e1-400e-b019-51d35a24eb40\"},   at Fri Jan 28 2022 19:04:33 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=PUT, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\",\"name\":\"Wavves\"},   at Sat Jan 29 2022 00:01:37 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=PUT, body: {\"id\":\"57cf89cb-d26c-4573-be9a-0a66f0b0c032\",\"name\":\"Wavves\"},   at Sat Jan 29 2022 00:01:45 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=POST, body: {\"name\":\"Red Hot Chili Peppers\"},   at Sat Jan 29 2022 00:02:19 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=POST, body: {\"name\":\"Jack White\"},   at Sat Jan 29 2022 00:02:40 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=GET,    at Sat Jan 29 2022 00:02:43 GMT+0400 (Samara Standard Time)","service":"user-group service"}
+{"level":"info","message":"url=/groups, method=PUT, body: {\"id\":\"0d8e3ee8-cc3b-4dd0-a678-b41091b1f782\",\"name\":\"The White Stripes\"},   at Sat Jan 29 2022 00:03:02 GMT+0400 (Samara Standard Time)","service":"user-group service"}

@@ -17,7 +17,6 @@ dotenv.config();
 const PORT = process.env.PORT || 8080;
 
 //  MIDDLEWARES
-//  parse body requests to JSON
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
@@ -26,7 +25,6 @@ app.use(cors());
 app.use(loggerMiddleware);
 app.use(authMiddleware);
 app.use(errorHandlerMiddleware);
-
 
 //  db initialization
 sequelise

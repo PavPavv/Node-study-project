@@ -20,7 +20,7 @@ export const getGroups = async (req: Request, res: Response, next: NextFunction)
 
 export const getGroupById = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.body.id;
-  const group = await groupsServices.getGroupById(id);
+  const group = await groupsServices.getGroupByIdService(id);
   if (group) {
     res.status(StatusCodesEnum.OK).json(group);
   } else {
