@@ -98,7 +98,7 @@ export const createUser =  async (user: UserType) => {
   try {
     const foundUser = await User.findOne({
       where: {
-        id: user.id,
+        login: user.login,
       },
     });
     if (!foundUser) {
@@ -110,7 +110,7 @@ export const createUser =  async (user: UserType) => {
   }
 };
 
-export const updateUser =  async (id: string, login: string, password: string, age: string) => {
+export const updateUser =  async (id: string, login: string, password: string, age: number) => {
   try {
     const foundUser = await User.findOne({
       where: {
@@ -122,7 +122,7 @@ export const updateUser =  async (id: string, login: string, password: string, a
         {
           login,
           password,
-          age,
+          age: age.toString(),
         },
         {
           where: {
@@ -132,7 +132,7 @@ export const updateUser =  async (id: string, login: string, password: string, a
       );
     }
     return foundUser;
-  } catch (err) {
+  } catch (err: any) {
     console.log('db error: ', err);
   }
 };
@@ -141,16 +141,26 @@ export const deleteUser =  async (id: string) => {
   try {
     const foundUser = await User.findOne({
       where: {
-        id,
-      },
+        [op.and]: [
+          {
+            isdeleted: false,
+          },
+          {
+            id,
+          },
+        ],
+      }
     });
     if (foundUser) {
-      const deletedUser = await User.destroy(
+      const updatedUser = await User.update(
+        {
+          'isdeleted': true,
+        },
         {
           where: {
             id,
-          }
-        }
+          },
+        },
       );
     }
     return foundUser;
