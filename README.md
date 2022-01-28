@@ -35,6 +35,7 @@ _server_ directory contains following:
 * **/middlewares** - app middle-wares which is using in the app.ts
 * **/models** - db models
 * **/routes** - all the project's endpoints here
+* **/services** - one of the layer of 3-layer-architecture
 * **/types** - server instances types
 
 _client_ directory contains following:
@@ -66,4 +67,4 @@ Added new packages _cors_ and _jsonwebtoken_ and middle-ware for authentication.
 and auth middleware.
 
 ## Homework 7: Unit tests
-Added unit tests for users controller.
+Added unit tests for users controller and groups controller. Added services layer in order to establish 3-layer architecture on the server (data-access/services/controllers).
